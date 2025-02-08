@@ -18,7 +18,7 @@ const deletePost = async (req, res) => {
     }
 
     if (post.authorId !== userID) {
-      return res.status(403).json({ message: "You don't have permission to delete this recipe" });
+      return res.status(403).json({ message: "You don't have permission to delete this post" });
     }
 
     await prisma.post.delete({
