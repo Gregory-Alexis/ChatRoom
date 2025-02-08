@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const { Server } = require('socket.io');
 
 const authRouter = require('./routes/auth_routes');
+const postRouter = require('./routes/post_routes');
 
 require('dotenv').config();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
+app.use('/api/post', postRouter);
 
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`);
