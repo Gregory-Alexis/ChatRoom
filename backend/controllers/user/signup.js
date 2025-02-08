@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 const signup = async (req, res) => {
   const { username, email, password } = req.body;
-  const userID = req.userID;
 
   try {
     if (!username || !email || !password) {
@@ -38,7 +37,7 @@ const signup = async (req, res) => {
       },
     });
 
-    generateTokenAndSetCookie(res, userID);
+    generateTokenAndSetCookie(res, user.id);
 
     res.status(200).json({ success: true, user });
   } catch (error) {
