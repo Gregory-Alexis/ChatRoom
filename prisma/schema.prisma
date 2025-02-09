@@ -41,7 +41,7 @@ model LikePost {
 }
 
 model DislikePost {
-  id     Int    @id @default(autoincrement())
+  id     String @id @default(uuid())
   user   User   @relation(fields: [userId], references: [id])
   userId String
   post   Post   @relation(fields: [postId], references: [id])
