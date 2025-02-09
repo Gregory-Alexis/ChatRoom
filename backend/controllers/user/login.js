@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  const userID = req.userID;
 
   try {
     if (!email || !password) {
@@ -27,7 +26,7 @@ const login = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid credentials' });
     }
 
-    generateTokenAndSetCookie(res, userID);
+    generateTokenAndSetCookie(res, user.id);
 
     delete user.password;
 
