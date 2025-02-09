@@ -4,12 +4,8 @@ const prisma = new PrismaClient();
 
 const deletePost = async (req, res) => {
   try {
-    const postID = parseInt(req.params.postID);
-    const userID = req.userID;
-
-    if (isNaN(postID)) {
-      return res.status(400).json({ success: false, message: 'Invalid post ID' });
-    }
+    const postID = req.params.postID;
+    const userID = req.userID.toString();
 
     const post = await prisma.post.findUnique({
       where: {

@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const createPost = async (req, res) => {
   try {
     const { content } = req.body;
-    const userID = req.userID;
+    const userID = req.userID.toString();
 
     if (!content) {
       return res.status(400).json({ success: false, message: 'content is required' });
