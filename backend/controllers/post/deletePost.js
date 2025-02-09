@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 const deletePost = async (req, res) => {
   try {
     const postID = parseInt(req.params.postID);
-    const userID = req.body.userID;
+    const userID = req.userID;
+
+    if (isNaN(postID)) {
+      return res.status(400).json({ success: false, message: 'Invalid post ID' });
+    }
 
     const post = await prisma.post.findUnique({
       where: {
@@ -27,9 +31,9 @@ const deletePost = async (req, res) => {
       },
     });
 
-    res.status(200).json({ message: 'Post deleted successfully' });
+    return res.status(200).json({ message: 'Post deleted successfully' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
