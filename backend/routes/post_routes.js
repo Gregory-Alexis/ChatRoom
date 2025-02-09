@@ -8,5 +8,6 @@ const postRouter = express.Router();
 postRouter.get('/', postController.getPosts);
 postRouter.post('/create', verifyToken, postController.createPost);
 postRouter.delete('/delete/:postID', verifyToken, postController.deletePost);
+postRouter.put('/update/:postID', verifyToken, postController.updatePost);
 
 module.exports = postRouter;
