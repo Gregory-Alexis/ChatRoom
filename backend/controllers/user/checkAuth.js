@@ -13,13 +13,14 @@ const checkAuth = async (req, res) => {
       where: {
         id: userID,
       },
+      omit: {
+        password: true,
+      },
     });
 
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
     }
-
-    delete user.password;
 
     res.status(200).json({ success: true, user });
   } catch (error) {
