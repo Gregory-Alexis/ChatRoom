@@ -3,10 +3,10 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const dislikePost = async (req, res) => {
-  try {
-    const { postID } = req.params;
-    const userID = req.userID;
+  const { postID } = req.params;
+  const userID = req.userID;
 
+  try {
     const dislikePostExist = await prisma.dislikePost.findUnique({
       where: {
         userId_postId: { userId: userID, postId: postID },
@@ -30,7 +30,7 @@ const dislikePost = async (req, res) => {
 
     return res.status(201).json({ success: true, message: 'Post successfully dislike', dislike });
   } catch (error) {
-    console.error('Error liking post:', error);
+    console.error('Error disliking post:', error);
     return res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
