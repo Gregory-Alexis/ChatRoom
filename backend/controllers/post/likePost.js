@@ -18,17 +18,17 @@ const likePost = async (req, res) => {
     }
 
     await prisma.dislikePost.deleteMany({
-      where: { userId_postId: { userId: userID, postId: postID } },
+      where: { userId: userID, postId: postID },
     });
 
     const like = await prisma.likePost.create({
       data: { userId: userID, postId: postID },
     });
 
-    res.status(201).json({ success: true, message: 'Post liked', like });
+    return res.status(201).json({ success: true, message: 'Post liked', like });
   } catch (error) {
     console.error('Error liking post:', error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
+    return res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };
 
