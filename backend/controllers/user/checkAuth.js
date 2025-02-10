@@ -3,13 +3,17 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const checkAuth = async (req, res) => {
-  const userID = req.userID;
+  const userID = req.userID.toString();
   try {
     if (!userID) {
       return res.status(401).json({ success: false, message: 'Unauthorized: User ID is missing' });
     }
 
-    const user = await prisma.user.findUnique(userID);
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userID,
+      },
+    });
 
     if (!user) {
       return res.status(404).json({ success: false, message: 'User not found' });
