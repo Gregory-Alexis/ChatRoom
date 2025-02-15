@@ -4,6 +4,8 @@ import axios from 'axios';
 const POST_API_URL = 'http://localhost:5000/api/post';
 
 type PostInput = {
+  id: string;
+  username: string;
   content: string;
 };
 
